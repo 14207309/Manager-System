@@ -1,0 +1,73 @@
+@CHARSET "UTF-8";
+
+#north {
+	overflow: hidden;
+	height: 60px;
+	background:url(../../css/images/login_bg.jpg);
+}
+
+#west{
+	font-size: 50px;
+}
+#n-footer {
+	height: 100px;
+	line-height: 40px;
+}
+
+#n-head-r {
+	font-size: 10px;
+	float: right;
+	padding-right: 50px;
+	padding-top: 20px;
+	color:#ff8040;
+	font-family: 宋体;
+	
+}
+
+#n-head-l {
+	font-size: 30px;
+	padding:center;
+	color:#000000;
+	font-family: 楷体;
+}
+
+#n-footer span :HOVER {
+	background-color: yellow;
+}
+#e-pan span {
+	height: 30px;
+	padding: 10px 0;
+	line-height: 30px;
+	display: inline-block;
+	text-align: center;
+}
+
+#e-pan a {
+	width: 90px;
+	padding: 10px 40px;
+	font-size: 16px;
+	display: inline-block;
+	font-family: "楷体";
+}
+
+#e-pan span :HOVER {
+	background-color: #E0ECFF;
+}
+
+#footer {
+	overflow: hidden;
+	height: 40px;
+	background: #D2E0F2;
+}
+
+#f-main {
+	text-align: center;
+	line-height: 40px;
+}
+#wellcome{
+	height:500px;
+	text-align: center;
+	line-height: 500px;
+	font-size: 60px;
+	font-family: 楷体;
+}

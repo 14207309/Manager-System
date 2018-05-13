@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.PortDao">
+	<resultMap id="BaseResultMap" type="com.model.Berth">
+		<id column="Berid" jdbcType="INTEGER" property="berid" />
+		<result column="Bernum" jdbcType="CHAR" property="bernum" />
+		<result column="Bername" jdbcType="CHAR" property="bername" />
+		<result column="Beroccupy" jdbcType="INTEGER" property="beroccupy" />
+		<result column="Berpeople" jdbcType="CHAR" property="berpeople" />
+	</resultMap>
+
+	<select id="BerthSearch" resultType="com.model.Berth">
+		select * from berth limit #{pageindex},#{pagesize}
+	</select>
+
+	<select id="count" resultType="java.lang.Integer">
+		SELECT count(*) from berth;
+	</select>
+
+	<select id="berthSearchid" resultType="com.model.Berth">
+		select * from berth where
+		Berid=#{berid,jdbcType=INTEGER}
+	</select>
+
+	<update id="berthState">
+		update berth set
+		Beroccupy=#{beroccupy,jdbcType=INTEGER} where
+		Berid=#{berid,jdbcType=INTEGER}
+	</update>
+
+	<insert id="berthStateA">
+		insert into berth (Bernum, Bername,
+		Beroccupy, Berpeople)
+		values ( #{bernum,jdbcType=CHAR}, #{bername,jdbcType=CHAR},
+		#{beroccupy,jdbcType=INTEGER}, #{berpeople,jdbcType=CHAR})
+	</insert>
+	
+	
+	<delete id="deleteberth" parameterType="java.lang.String">
+		DELETE FROM berth WHERE Bernum = #{bernum,jdbcType=CHAR}
+	</delete>
+	
+</mapper>

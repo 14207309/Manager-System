@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.IPortworkerDao">
+	<!-- 港口工作人员表 -->
+	<resultMap id="UserResult" type="com.model.Portworker">
+		<id column="Wid" property="wid" />
+		<result column="Wnumber" property="wnumber" />
+		<result column="Wpassword" property="wpassword" />
+		<result column="Wname" property="wname" />
+		<result column="Wsex" property="wsex" />
+		<result column="Wbirth" property="wbirth" />
+		<result column="Wcall" property="wcall" />
+		<result column="Waddr" property="waddr" />
+		<result column="Wqq" property="wqq" />
+		<result column="WeChat" property="wechat" />
+		<result column="Wworkemail" property="wworkemail" />
+		<result column="Wworkstate" property="wworkstate" />
+		<result column="Wworkstyle" property="wworkstyle" />
+		<!-- 企业工作人员表 -->
+		<collection property="enterpriseworker" ofType="com.model.Enterpriseworker">
+			<id column="Nid" jdbcType="INTEGER" property="nid" />
+			<result column="Nnumber" jdbcType="CHAR" property="nnumber" />
+			<result column="Nname" jdbcType="CHAR" property="nname" />
+			<result column="Nsex" jdbcType="CHAR" property="nsex" />
+			<result column="Ndate" jdbcType="DATE" property="ndate" />
+			<result column="Ncall" jdbcType="CHAR" property="ncall" />
+			<result column="Naddr" jdbcType="CHAR" property="naddr" />
+			<result column="Nworkemail" jdbcType="CHAR" property="nworkemail" />
+			<result column="Nworkstyle" jdbcType="CHAR" property="nworkstyle" />
+		</collection>
+		<!-- 港口企业表 -->
+		<collection property="portEnterprise" ofType="com.model.PortEnterprise">
+			<id column="Eid" jdbcType="INTEGER" property="eid" />
+			<result column="Enumber" jdbcType="CHAR" property="enumber" />
+			<result column="Epassword" jdbcType="CHAR" property="epassword" />
+			<result column="Ename" jdbcType="CHAR" property="ename" />
+			<result column="Ecode" jdbcType="CHAR" property="ecode" />
+			<result column="Eaddr" jdbcType="CHAR" property="eaddr" />
+			<result column="Elegpeople" jdbcType="CHAR" property="elegpeople" />
+			<result column="Emoney" jdbcType="DOUBLE" property="emoney" />
+			<result column="Estyle" jdbcType="CHAR" property="estyle" />
+			<result column="EestDate" jdbcType="DATE" property="eestdate" />
+			<result column="EendDate" jdbcType="DATE" property="eenddate" />
+			<result column="Ecertstate" jdbcType="CHAR" property="ecertstate" />
+			<result column="Eflag" jdbcType="INTEGER" property="eflag" />
+		</collection>
+	</resultMap>
+
+
+	<!-- 查询港口企业相关工作人员的所有用户信息 -->
+	<select id="findUser" resultType="com.model.Enterpriseworker">
+		SELECT * from enterpriseworker limit #{pageindex},#{pagesize};
+	</select>
+
+	<select id="FindEnterpriseWorkertrans" resultType="com.model.Enterpriseworker">
+		SELECT * from
+		enterpriseworker where Nworkstyle like '%运输%';
+	</select>
+	
+	<!-- 统计港口企业工作人员记录条数 -->
+	<select id="count" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		SELECT count(*) from enterpriseworker;
+	</select>
+
+	<!-- 港口工作人员登录查询 -->
+	<select id="login2" resultMap="UserResult" parameterType="java.lang.String">
+		select
+		* from portworker where Wnumber=#{username, jdbcType=VARCHAR}
+	</select>
+	
+	<update id="revisepass" >
+		update portworker set Wpassword=#{newPass,jdbcType=CHAR} where Wnumber=#{username, jdbcType=VARCHAR}
+	</update>
+	<select id="selectPortworker" resultMap="UserResult">
+		select * from
+		portworker;
+	</select>
+
+	<insert id="insertportWorker" parameterType="com.model.Portworker">
+		insert into
+		portworker
+		(Wnumber,Wname,Wsex,Wbirth,Wcall,Waddr,Wqq,WeChat,Wworkemail,Wworkstate,Wworkstyle)
+		values (#{wnumber,jdbcType=CHAR},
+		#{wname,jdbcType=CHAR},#{wsex,jdbcType=CHAR}, #{wbirth,jdbcType=DATE},
+		#{wcall,jdbcType=CHAR}, #{waddr,jdbcType=CHAR},
+		#{wqq,jdbcType=CHAR},#{wechat,jdbcType=CHAR},#{wworkemail,jdbcType=CHAR},#{wworkstate,jdbcType=CHAR},#{wworkstyle,jdbcType=INTEGER})
+	</insert>
+
+	<update id="updatePortWorker" parameterType="com.model.Portworker">
+		update portworker
+		set
+		Wname=#{wname,jdbcType=CHAR},
+		Wsex=#{wsex,jdbcType=CHAR},
+		Wbirth=#{wbirth,jdbcType=DATE},
+		Wcall=#{wcall,jdbcType=CHAR},
+		Waddr=#{waddr,jdbcType=CHAR},
+		Wqq=#{wqq,jdbcType=CHAR},
+		WeChat=#{wechat,jdbcType=CHAR},
+		Wworkemail=#{wworkemail,jdbcType=CHAR},
+		Wworkstate=#{wworkstate,jdbcType=CHAR},
+		Wworkstyle=#{wworkstyle,jdbcType=INTEGER}
+		where Wnumber =
+		#{wnumber,jdbcType=CHAR}
+	</update>
+
+	<delete id="deletePortWorker">
+		DELETE FROM portworker WHERE Wnumber =
+		#{wnumber,jdbcType=CHAR}
+	</delete>
+	<!-- 港口企业信息查询 -->
+	<select id="portEnterpriseinfo" resultType="com.model.PortEnterprise">
+		SELECT
+		Enumber,Ename,Ecode,Eaddr,Elegpeople,Emoney,Estyle,EestDate,EendDate,Ecertstate,
+		Eflag FROM port_enterprise
+	</select>
+
+	<!-- 统计港口企业记录条数 -->
+	<select id="count1" resultType="java.lang.Integer">
+		SELECT
+		count(*) from
+		port_enterprise;
+	</select>
+
+	<select id="selectNnumber" resultType="java.lang.String"
+		parameterType="java.lang.String">
+		select Nnumber from port_enterprise;
+	</select>
+
+	<!-- 驻港企业信息查询###针对固定编号 -->
+	<select id="selectPortEnterpriseinfo" resultType="com.model.PortEnterprise"
+		parameterType="java.lang.String">
+		select * from port_enterprise where
+		Enumber=#{wnum,jdbcType=CHAR};
+	</select>
+
+	<!-- 提交驻港企业审核信息 -->
+	<update id="submitportEnterpriseinfo" parameterType="com.model.PortEnterprise">
+		update
+		port_enterprise set
+		Ecertstate=#{ecertstate,jdbcType=CHAR},Eflag=#{eflag,jdbcType=INTEGER}
+		where Enumber=#{enumber,jdbcType=CHAR}
+	</update>
+
+	<!-- 删除驻港企业信息 -->
+	<delete id="deleteportEnterpriseinfo">
+		DELETE FROM port_enterprise WHERE Enumber =
+		#{enumber,jdbcType=CHAR}
+	</delete>
+	<!-- <insert id="addenterpriseworker" parameterType="com.model.User"> insert 
+		into port_enterprise (Nnumber,Nname,Nsex,Ndate,Ncall,Naddr,Nworkemail,Nworkstyle) 
+		values (#{nnumber,jdbcType=CHAR}, #{nname,jdbcType=CHAR},#{nsex,jdbcType=CHAR}, 
+		#{ndate,jdbcType=DATE}, #{ncall,jdbcType=CHAR}, #{elegpeople,jdbcType=CHAR}, 
+		#{naddr,jdbcType=CHAR}, #{nworkemail,jdbcType=CHAR},#{nworkstyle,jdbcType=CHAR}) 
+		</insert> -->
+	<!-- <insert id="insert"> insert into user(id,name,password,school) value(null,#{name},#{password},#{school}) 
+		</insert> -->
+	<!-- <select id="login" resultMap="UserResult" parameterType="java.lang.String"> 
+		select * from user where name=#{username, jdbcType=VARCHAR} <where> <choose> 
+		<when test="name!=null and password!=null"> and name=#{username, jdbcType=VARCHAR} 
+		</when> </choose> </where> </select> -->
+</mapper>

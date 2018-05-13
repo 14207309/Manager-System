@@ -1,0 +1,111 @@
+body{
+	font-size:12px;
+	font-family:Verdana, Geneva, sans-serif;
+	line-height:23px;
+	margin:0;
+	padding:0;
+ 	background:url(../../css/images/login_bg.jpg);
+}
+.second_body{
+	margin:0 auto;
+	width:400px;
+	height:280px;
+	margin-top:10%;
+	padding-left:300px;
+	padding-top:110px;
+	background:url(../../css/images/login_panel.png) no-repeat;
+	position:relative;
+	}
+	
+.button{
+    top:80px;
+    left:320px;
+    width:100px;
+	height:30px;
+	color:#FFF;
+	font-size:17px;
+	background:url(../../css/images/10.png);
+	font-family: 楷体
+}
+
+.port_button{
+	position:absolute;
+    top:170px;
+    left:45px;
+    width:156px;
+	height:48px;
+	color:#FFF;
+	font-size:17px;
+	line-height:26px;
+	background:url(../../css/images/10.png);
+	
+	font-family: 楷体
+}
+.select{
+	font-size:18px;
+	font-family: 楷体
+}
+.remember{
+	left:45px;
+}
+.title-zh{
+    position:absolute;
+    top:50px;
+    left:258px;
+    font-size:28px;
+    font-weight:900;
+    color:#400080;
+    font-family: 楷体
+}
+
+.title-en{
+    position:absolute;
+    top:70px;
+    left:274px;
+    font-size:12px;
+    color:#9aa5a9;
+}
+
+ .message{   
+    position:absolute;
+    bottom:80px;
+    left:312px;
+    color:red;
+}
+
+.logo{
+     position:absolute;
+     left:50px;
+     top:80px;
+}
+
+.login,.login2{
+	width:200px;
+	border:1px solid #7fb5c1;
+	height:22px;
+	vertical-align:text-bottom;
+	}
+
+.login2{
+	width:125px;
+	}
+
+.login1{
+	width:100px;
+	vertical-align:text-bottom;
+}
+	
+.login_button,.reset_botton{
+	width:80px;
+	height:35px;
+	border:none;
+	color:#FFF;
+	font-weight:bold;
+	background:url(../../css/images/02.png);
+	margin-left:20px;
+	font-size:18px;
+	font-family: 楷体
+	}
+.reset_botton{
+	background:url(../../css/images/03.png);
+	}

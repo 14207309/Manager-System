@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<!-- 企业端操作 -->
+<mapper namespace="com.dao.IUserDao"> 
+	<resultMap id="UserResult" type="com.model.User">
+		<id column="Eid" jdbcType="INTEGER" property="eid" />
+		<result column="Enumber" jdbcType="CHAR" property="enumber" />
+		<result column="Epassword" jdbcType="CHAR" property="epassword" />
+		<result column="Ename" jdbcType="CHAR" property="ename" />
+		<result column="Ecode" jdbcType="CHAR" property="ecode" />
+		<result column="Eaddr" jdbcType="CHAR" property="eaddr" />
+		<result column="Elegpeople" jdbcType="CHAR" property="elegpeople" />
+		<result column="Emoney" jdbcType="DOUBLE" property="emoney" />
+		<result column="Estyle" jdbcType="CHAR" property="estyle" />
+		<result column="EestDate" jdbcType="DATE" property="eestdate" />
+		<result column="EendDate" jdbcType="DATE" property="eenddate" />
+		<result column="Ecertstate" jdbcType="CHAR" property="ecertstate" />
+		<result column="Eflag" jdbcType="INTEGER" property="eflag" />
+	<!-- 企业工作人员表 -->
+	 <collection property="enterpriseworker" ofType="com.model.Enterpriseworker">
+	    <id column="Nid" jdbcType="INTEGER" property="nid" />
+	    <result column="Nnumber" jdbcType="CHAR" property="nnumber" />
+	    <result column="Nname" jdbcType="CHAR" property="nname" />
+	    <result column="Nsex" jdbcType="CHAR" property="nsex" />
+	    <result column="Ndate" jdbcType="DATE" property="ndate" />
+	    <result column="Ncall" jdbcType="CHAR" property="ncall" />
+	    <result column="Naddr" jdbcType="CHAR" property="naddr" />
+	    <result column="Nworkemail" jdbcType="CHAR" property="nworkemail" />
+	    <result column="Nworkstyle" jdbcType="CHAR" property="nworkstyle" />
+	</collection>
+	</resultMap>
+	
+	
+	<select id="login" resultType="java.lang.String" parameterType="java.lang.String">
+	    select Epassword from port_enterprise where Enumber=#{username, jdbcType=CHAR}
+   	</select>
+   	
+   	 <select id="searchename" resultType="java.lang.String" parameterType="java.lang.String">
+	    select Ename from port_enterprise where Enumber=#{username, jdbcType=CHAR}
+   	</select>
+   	<select id="selectEnumber" resultType="com.model.User" parameterType="java.lang.String">
+		select * from port_enterprise where Enumber=#{enumber, jdbcType=CHAR}
+	</select>
+   	<!-- 港口企业注册 -->
+   	<insert id="register" parameterType="com.model.User">
+   		insert into port_enterprise (Enumber,Epassword,Ename,Ecode,Eaddr,Elegpeople,Emoney,Estyle,EestDate,EendDate,Ecertstate,Eflag)
+    	values (#{enumber,jdbcType=CHAR}, #{epassword,jdbcType=CHAR},#{ename,jdbcType=CHAR}, #{ecode,jdbcType=CHAR}, #{eaddr,jdbcType=CHAR}, #{elegpeople,jdbcType=CHAR}, 
+    	#{emoney,jdbcType=DOUBLE}, #{estyle,jdbcType=CHAR}, #{eestdate,jdbcType=DATE},#{eenddate,jdbcType=DATE}, #{ecertstate,jdbcType=CHAR}, #{eflag,jdbcType=INTEGER})
+  	</insert>
+  	
+  	<!-- 港口企业工作人员编号查询 -->
+  	<select id="selectNnumber" resultType="java.lang.String" parameterType="java.lang.String">
+		select * from enterpriseworker where Nnumber=#{nnumber,jdbcType=CHAR}
+	</select>
+	
+   	<!-- 港口企业工作人员添加 -->
+   	<insert id="addenterpriseworker" parameterType="com.model.Enterpriseworker">
+   		insert into enterpriseworker (Nnumber,Nname,Nsex,Ndate,Ncall,Naddr,Nworkemail,Nworkstyle)
+    	values (#{nnumber,jdbcType=CHAR}, #{nname,jdbcType=CHAR},#{nsex,jdbcType=CHAR}, #{ndate,jdbcType=DATE}, #{ncall,jdbcType=CHAR}, 
+    	#{naddr,jdbcType=CHAR}, #{nworkemail,jdbcType=CHAR},#{nworkstyle,jdbcType=CHAR})
+  	</insert>
+<!--   	
+  	港口企业工作人员编号查询
+  	<select id="updateNnumber" resultType="java.lang.String" parameterType="java.lang.String">
+		select Nnumber from enterpriseworker
+	</select> -->
+  	<!-- 港口企业工作人员信息修改 -->
+  	<update id="updateenterpriseworker" parameterType="com.model.Enterpriseworker">
+    update enterpriseworker
+    set Nname = #{nname,jdbcType=CHAR},
+      Nsex = #{nsex,jdbcType=CHAR},
+      Ndate = #{ndate,jdbcType=DATE},
+      Ncall = #{ncall,jdbcType=CHAR},
+      Naddr = #{naddr,jdbcType=CHAR},
+      Nworkemail = #{nworkemail,jdbcType=CHAR},
+      Nworkstyle = #{nworkstyle,jdbcType=CHAR}
+    where Nnumber = #{nnumber,jdbcType=CHAR}
+  </update>
+  <delete id="deleteEnterpriseworker">
+  	DELETE FROM enterpriseworker WHERE Nnumber = #{nnumber,jdbcType=CHAR}
+  </delete>
+<!-- 
+  	<select id="enterpriseInfo" resultType="com.model.User" parameterType="java.lang.String">
+		select * from port_enterprise where 
+	</select> -->
+</mapper>

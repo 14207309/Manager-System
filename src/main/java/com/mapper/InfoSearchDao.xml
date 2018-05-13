@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.InfoSearchDao">
+	<resultMap id="UserResult" type="com.model.RiskGoodsPet">
+		<id column="Rid" jdbcType="INTEGER" property="rid" />
+		<result column="Rurgent" jdbcType="INTEGER" property="rurgent" />
+		<result column="Rsave" jdbcType="INTEGER" property="rsave" />
+		<result column="Rnum" jdbcType="CHAR" property="rnum" />
+		<result column="Rcompany" jdbcType="CHAR" property="rcompany" />
+		<result column="Rpeople" jdbcType="CHAR" property="rpeople" />
+		<result column="Rshipper" jdbcType="CHAR" property="rshipper" />
+		<result column="Rconsignee" jdbcType="CHAR" property="rconsignee" />
+		<result column="Rcarrier" jdbcType="CHAR" property="rcarrier" />
+		<result column="Rshipname" jdbcType="CHAR" property="rshipname" />
+		<result column="Rportloading" jdbcType="CHAR" property="rportloading" />
+		<result column="RloadingTime" jdbcType="DATE" property="rloadingtime" />
+		<result column="Rdischarging" jdbcType="CHAR" property="rdischarging" />
+		<result column="RpredelTime" jdbcType="DATE" property="rpredeltime" />
+		<result column="RpradelTime" jdbcType="DATE" property="rpradeltime" />
+		<result column="Rdelived" jdbcType="CHAR" property="rdelived" />
+		<result column="Rgoodsstyle" jdbcType="CHAR" property="rgoodsstyle" />
+		<result column="Rweight" jdbcType="DOUBLE" property="rweight" />
+		<result column="RpetTime" jdbcType="DATE" property="rpettime" />
+		<result column="Rworkwharf" jdbcType="CHAR" property="rworkwharf" />
+		<result column="Rport" jdbcType="CHAR" property="rport" />
+		<result column="Rportflag" jdbcType="CHAR" property="rportflag" />
+		<result column="Rprin" jdbcType="CHAR" property="rprin" />
+		<result column="RprinCall" jdbcType="CHAR" property="rprincall" />
+		<result column="Rodour" jdbcType="CHAR" property="rodour" />
+		<result column="Rignitionpoint" jdbcType="DOUBLE" property="rignitionpoint" />
+		<result column="Rtoxicity" jdbcType="CHAR" property="rtoxicity" />
+		<result column="QFcompany" jdbcType="INTEGER" property="qfcompany" />
+		<result column="QFrstyle" jdbcType="INTEGER" property="qfrstyle" />
+		<result column="QFpack" jdbcType="INTEGER" property="qfpack" />
+		<result column="QFweight" jdbcType="INTEGER" property="qfweight" />
+		<result column="QFboat" jdbcType="INTEGER" property="qfboat" />
+		<result column="QFdate" jdbcType="DATE" property="qfdate" />
+		<result column="QFpeople" jdbcType="CHAR" property="qfpeople" />
+		<result column="QFflag" jdbcType="INTEGER" property="qfflag" />
+		<result column="QScompany" jdbcType="INTEGER" property="qscompany" />
+		<result column="QSboat" jdbcType="INTEGER" property="qsboat" />
+		<result column="QSrstyle" jdbcType="INTEGER" property="qsrstyle" />
+		<result column="QSpack" jdbcType="INTEGER" property="qspack" />
+		<result column="QSweight" jdbcType="INTEGER" property="qsweight" />
+		<result column="QSreveal" jdbcType="INTEGER" property="qsreveal" />
+		<result column="QSpica" jdbcType="VARCHAR" property="qspica" />
+		<result column="QSpicb" jdbcType="VARCHAR" property="qspicb" />
+		<result column="QSdate" jdbcType="DATE" property="qsdate" />
+		<result column="QSpeople" jdbcType="CHAR" property="qspeople" />
+		<result column="QSflag" jdbcType="INTEGER" property="qsflag" />
+		<!-- 审批表 <collection property="enterpriseworker" ofType="com.model.Audit"> 
+			<id column="Qid" jdbcType="INTEGER" property="qid" /> </collection> -->
+
+		<collection property="comment" ofType="com.model.Comment">
+			<id column="Cid" jdbcType="INTEGER" property="cid" />
+			<result column="Ccompany" jdbcType="CHAR" property="ccompany" />
+			<result column="Cname" jdbcType="CHAR" property="cname" />
+			<result column="Cdate" jdbcType="DATE" property="cdate" />
+			<result column="Ccontext" jdbcType="VARCHAR" property="ccontext" />
+			<result column="Crepname" jdbcType="CHAR" property="crepname" />
+			<result column="Crepdate" jdbcType="DATE" property="crepdate" />
+			<result column="Crepcont" jdbcType="VARCHAR" property="crepcont" />
+			<result column="Cflag" jdbcType="INTEGER" property="cflag" />
+		</collection>
+		<collection property="Notice" ofType="com.model.Notice">
+			<id column="NOid" jdbcType="INTEGER" property="noid" />
+			<result column="NOname" jdbcType="CHAR" property="noname" />
+			<result column="NOtitle" jdbcType="CHAR" property="notitle" />
+			<result column="NOdate" jdbcType="DATE" property="nodate" />
+			<result column="NOcontext" jdbcType="VARCHAR" property="nocontext" />
+			<result column="Nflag" jdbcType="INTEGER" property="nflag" />
+		</collection>
+	</resultMap>
+	<!-- 申报信息注册 -->
+	<insert id="insertRiskgood" parameterType="com.model.RiskGoodsPet">
+		insert into
+		risk_goods_pet (Rurgent,Rsave,Rnum, Rcompany,Rpeople, Rshipper,
+		Rconsignee,Rcarrier,
+		Rshipname, Rportloading,RloadingTime,
+		Rdischarging,RpredelTime,RpradelTime, Rdelived, Rgoodsstyle,Rweight,
+		RpetTime,Rworkwharf,Rport, Rportflag, Rprin, RprinCall,Rodour,
+		Rignitionpoint,Rtoxicity,QFflag,QScompany,QSboat,QSrstyle,QSpack,QSweight,QSreveal,QSpica,QSpicb,QSdate,QSpeople,QSflag)
+		values
+		(#{rurgent,jdbcType=INTEGER},#{rsave,jdbcType=INTEGER},#{rnum,jdbcType=CHAR},#{rcompany,jdbcType=CHAR},#{rpeople,jdbcType=CHAR},
+		#{rshipper,jdbcType=CHAR},
+		#{rconsignee,jdbcType=CHAR},#{rcarrier,jdbcType=CHAR},
+		#{rshipname,jdbcType=CHAR},#{rportloading,jdbcType=CHAR},#{rloadingtime,jdbcType=DATE},
+		#{rdischarging,jdbcType=CHAR}, #{rpredeltime,jdbcType=DATE},
+		#{rpradeltime,jdbcType=DATE},#{rdelived,jdbcType=CHAR},#{rgoodsstyle,jdbcType=CHAR},#{rweight,jdbcType=DOUBLE},
+		#{rpettime,jdbcType=DATE}, #{rworkwharf,jdbcType=CHAR},
+		#{rport,jdbcType=CHAR},#{rportflag,jdbcType=CHAR},#{rprin,jdbcType=CHAR},
+		#{rprincall,jdbcType=CHAR},#{rodour,jdbcType=CHAR},
+		#{rignitionpoint,jdbcType=DOUBLE},#{rtoxicity,jdbcType=CHAR},#{qfflag,jdbcType=INTEGER},#{qscompany,jdbcType=INTEGER},
+		#{qsboat,jdbcType=INTEGER},#{qsrstyle,jdbcType=INTEGER},#{qspack,jdbcType=INTEGER},
+		#{qsweight,jdbcType=INTEGER},#{qsreveal,jdbcType=INTEGER},#{qspica,jdbcType=VARCHAR},
+		#{qspicb,jdbcType=VARCHAR},#{qsdate,jdbcType=DATE},#{qspeople,jdbcType=CHAR},#{qsflag,jdbcType=INTEGER})
+	</insert>
+	<!-- 申报信息查询 #####针对固定企业 -->
+	<select id="selectRiskgood" resultType="com.model.RiskGoodsPet">
+		select Rurgent,Rnum,
+		Rcompany,Rpeople, Rshipper,
+		Rconsignee,Rcarrier,
+		Rshipname,
+		Rportloading,RloadingTime,
+		Rdischarging,RpredelTime,RpradelTime,
+		Rdelived, Rgoodsstyle,Rweight,
+		RpetTime,Rworkwharf,Rport, Rportflag,
+		Rprin, RprinCall,Rodour,
+		Rignitionpoint,Rtoxicity,QFflag,QSflag from
+		risk_goods_pet
+		where
+		Rcompany=#{s,jdbcType=CHAR}
+		limit #{pageindex},#{pagesize}
+	</select>
+	<select id="selectRiskgoods" resultType="com.model.RiskGoodsPet">
+		select Rurgent,Rnum,
+		Rcompany,Rpeople, Rshipper,
+		Rconsignee,Rcarrier,
+		Rshipname,
+		Rportloading,RloadingTime,
+		Rdischarging,RpredelTime,RpradelTime,
+		Rdelived, Rgoodsstyle,Rweight,
+		RpetTime,Rworkwharf,Rport, Rportflag,
+		Rprin, RprinCall,Rodour,
+		Rignitionpoint,Rtoxicity,QFflag,QSflag
+		from
+		risk_goods_pet
+		limit #{pageindex},#{pagesize}
+	</select>
+
+	<select id="selectRiskgoodsRid" resultType="com.model.RiskGoodsPet">
+		select Rurgent,Rnum,
+		Rcompany,Rpeople, Rshipper,
+		Rconsignee,Rcarrier,
+		Rshipname,
+		Rportloading,RloadingTime,
+		Rdischarging,RpredelTime,RpradelTime,
+		Rdelived, Rgoodsstyle,Rweight,
+		RpetTime,Rworkwharf,Rport, Rportflag,
+		Rprin, RprinCall,Rodour,
+		Rignitionpoint,Rtoxicity,QFflag,QSflag
+		from
+		risk_goods_pet
+		where Rurgent=1
+		limit #{pageindex},#{pagesize}
+	</select>
+	<!-- 紧急申报 -->
+	<select id="selectRiskgoodsUrgent" resultType="com.model.RiskGoodsPet">
+		select Rurgent,Rnum,
+		Rcompany,Rpeople, Rshipper,
+		Rconsignee,Rcarrier,
+		Rshipname,
+		Rportloading,RloadingTime,
+		Rdischarging,RpredelTime,RpradelTime,
+		Rdelived, Rgoodsstyle,Rweight,
+		RpetTime,Rworkwharf,Rport, Rportflag,
+		Rprin, RprinCall,Rodour,
+		Rignitionpoint,Rtoxicity,QFflag,QSflag
+		from
+		risk_goods_pet
+		where Rurgent=1
+		limit #{pageindex},#{pagesize}
+	</select>
+	
+	<!-- 审核中-->
+	<select id="selectRiskgoodsAuditing" resultType="com.model.RiskGoodsPet">
+		select Rurgent,Rnum,
+		Rcompany,Rpeople, Rshipper,
+		Rconsignee,Rcarrier,
+		Rshipname,
+		Rportloading,RloadingTime,
+		Rdischarging,RpredelTime,RpradelTime,
+		Rdelived, Rgoodsstyle,Rweight,
+		RpetTime,Rworkwharf,Rport, Rportflag,
+		Rprin, RprinCall,Rodour,
+		Rignitionpoint,Rtoxicity,QFflag,QSflag
+		from
+		risk_goods_pet
+		where (QFflag=0 and QSflag=1) or (QFflag=1 and QSflag=0)
+		
+		limit #{pageindex},#{pagesize}
+	</select>
+	
+	<!-- 未审核-->
+	<select id="selectRiskgoodsNoAudit" resultType="com.model.RiskGoodsPet">
+		select Rurgent,Rnum,
+		Rcompany,Rpeople, Rshipper,
+		Rconsignee,Rcarrier,
+		Rshipname,
+		Rportloading,RloadingTime,
+		Rdischarging,RpredelTime,RpradelTime,
+		Rdelived, Rgoodsstyle,Rweight,
+		RpetTime,Rworkwharf,Rport, Rportflag,
+		Rprin, RprinCall,Rodour,
+		Rignitionpoint,Rtoxicity,QFflag,QSflag
+		from
+		risk_goods_pet
+		where QFflag=0 and QSflag=0
+		
+		limit #{pageindex},#{pagesize}
+	</select>
+	
+	<!-- 通过审核-->
+	<select id="selectRiskgoodsYesAudit" resultType="com.model.RiskGoodsPet">
+		select Rurgent,Rnum,
+		Rcompany,Rpeople, Rshipper,
+		Rconsignee,Rcarrier,
+		Rshipname,
+		Rportloading,RloadingTime,
+		Rdischarging,RpredelTime,RpradelTime,
+		Rdelived, Rgoodsstyle,Rweight,
+		RpetTime,Rworkwharf,Rport, Rportflag,
+		Rprin, RprinCall,Rodour,
+		Rignitionpoint,Rtoxicity,QFflag,QSflag
+		from
+		risk_goods_pet
+		where QFflag=1 and QSflag=1
+		limit #{pageindex},#{pagesize}
+	</select>
+	
+	<!-- 未通过审核-->
+	<select id="selectRiskgoodsNotAudit" resultType="com.model.RiskGoodsPet">
+		select Rurgent,Rnum,
+		Rcompany,Rpeople, Rshipper,
+		Rconsignee,Rcarrier,
+		Rshipname,
+		Rportloading,RloadingTime,
+		Rdischarging,RpredelTime,RpradelTime,
+		Rdelived, Rgoodsstyle,Rweight,
+		RpetTime,Rworkwharf,Rport, Rportflag,
+		Rprin, RprinCall,Rodour,
+		Rignitionpoint,Rtoxicity,QFflag,QSflag
+		from
+		risk_goods_pet
+		where (QFflag=2 and QSflag=0) or (QFflag=0 and QSflag=2) 
+		limit #{pageindex},#{pagesize}
+	</select>
+	
+	<select id="count" resultType="java.lang.Integer">
+		SELECT count(*) from
+		risk_goods_pet;
+	</select>
+	<!-- 针对固定申请编号查询 -->
+	<select id="selectRnumRiskgood" resultType="com.model.RiskGoodsPet"
+		parameterType="java.lang.String">
+		select * from risk_goods_pet
+		where
+		Rnum=#{rnum,jdbcType=CHAR}
+
+	</select>
+	<!-- 一轮审核 -->
+	<update id="firstAuditdao" parameterType="com.model.RiskGoodsPet">
+		update
+		risk_goods_pet
+		set
+		QFcompany =
+		#{qfcompany,jdbcType=INTEGER},
+		QFrstyle =
+		#{qfrstyle,jdbcType=INTEGER},
+		QFpack = #{qfpack,jdbcType=INTEGER},
+		QFweight =
+		#{qfweight,jdbcType=INTEGER},
+		QFboat =
+		#{qfboat,jdbcType=INTEGER},
+		QFdate = #{qfdate,jdbcType=DATE},
+		QFpeople =
+		#{qfpeople,jdbcType=CHAR},
+		QFflag =#{qfflag,jdbcType=INTEGER}
+		where Rnum
+		= #{rnum,jdbcType=CHAR}
+
+	</update>
+	<!-- 二轮审核 -->
+	<update id="secondAuditdao" parameterType="com.model.RiskGoodsPet">
+		update
+		risk_goods_pet
+		set
+		QScompany=#{qscompany,jdbcType=INTEGER},
+		QSboat =
+		#{qsboat,jdbcType=INTEGER},
+		QSrstyle = #{qsrstyle,jdbcType=INTEGER},
+		QSpack =#{qspack,jdbcType=INTEGER},
+		QSweight =
+		#{qsweight,jdbcType=INTEGER},
+		QSreveal = #{qsreveal,jdbcType=INTEGER},
+		QSpica =#{qspica,jdbcType=VARCHAR},
+		QSpicb =
+		#{qspicb,jdbcType=VARCHAR},
+		QSdate= #{qsdate,jdbcType=DATE},
+		QSpeople =
+		#{qspeople,jdbcType=CHAR},
+		QSflag=#{qsflag,jdbcType=INTEGER}
+		where Rnum
+		= #{rnum,jdbcType=CHAR}
+	</update>
+
+	<delete id="deleteriskgoodsInfo" parameterType="java.lang.String">
+		DELETE FROM
+		risk_goods_pet WHERE Rnum = #{rnum,jdbcType=CHAR}
+	</delete>
+
+	<!-- 意见箱操作 -->
+	<insert id="commentinsert">
+		insert into comment (Ccompany,Cname,Cdate,Ccontext,Cflag) values
+		(#{ccompany,jdbcType=CHAR},#{cname,jdbcType=CHAR},#{cdate,jdbcType=DATE},#{ccontext,jdbcType=VARCHAR},#{cflag,jdbcType=INTEGER})
+	</insert>
+
+	<!-- commentSearch2 -->
+	<select id="commentSearch" resultType="com.model.Comment">
+		select * from comment limit #{pageindex},#{pagesize}
+	</select>
+	<select id="count1" resultType="java.lang.Integer">
+		SELECT count(*) from comment;
+	</select>
+
+	<select id="commentSearch2" resultType="com.model.Comment"
+		parameterType="java.lang.String">
+		select * from comment where Cid=#{cid,jdbcType=INTEGER}
+	</select>
+	<!-- 只查询审核通过的意见 -->
+	<select id="commentSearchFlag" resultType="com.model.Comment">
+		select * from comment where Cflag=1
+	</select>
+	<!-- 针对企业查询 -->
+	<select id="CommentSearchCompany" resultType="com.model.Comment"
+		parameterType="java.lang.String">
+		select * from comment where Ccompany=#{ccompany,jdbcType=CHAR}
+	</select>
+	<update id="commentReply" parameterType="com.model.Comment">
+		update comment set
+		Cflag=#{cflag,jdbcType=INTEGER} where Cid=#{cid,jdbcType=INTEGER}
+	</update>
+
+	<update id="CommentReplyA" parameterType="com.model.Comment">
+		update comment set
+		Crepname=#{crepname,jdbcType=CHAR},
+		Crepdate=#{crepdate,jdbcType=DATE},
+		Crepcont=#{crepcont,jdbcType=VARCHAR}
+		where Cid=#{cid,jdbcType=INTEGER}
+	</update>
+	<!-- 审核通过数目 -->
+	<select id="count2" resultType="com.model.RiskGoodsPet">
+		select Rurgent,Rnum,
+		Rcompany,Rpeople, Rshipper,
+		Rconsignee,Rcarrier,
+		Rshipname,
+		Rportloading,RloadingTime,
+		Rdischarging,RpredelTime,RpradelTime,
+		Rdelived, Rgoodsstyle,Rweight,
+		RpetTime,Rworkwharf,Rport, Rportflag,
+		Rprin, RprinCall,Rodour,
+		Rignitionpoint,Rtoxicity,QFflag,QSflag
+		from
+		risk_goods_pet
+	</select>
+	<!-- noticeInsert -->
+	<insert id="noticeInsert" >
+		insert into notice (NOname, NOtitle,
+		NOdate, NOcontext, Nflag
+		)
+		values (#{noname,jdbcType=CHAR},
+		#{notitle,jdbcType=CHAR},
+		#{nodate,jdbcType=DATE}, #{nocontext,jdbcType=VARCHAR}, #{nflag,jdbcType=INTEGER}
+		)
+	</insert>
+	<select id="NoticeSearch" resultType="com.model.Notice">
+		select * from notice limit #{pageindex},#{pagesize}
+	</select>
+	
+	<select id="NoticeSearchPass" resultType="com.model.Notice">
+		select * from notice where Nflag=1 limit #{pageindex},#{pagesize}
+	</select>
+	<select id="NoticeSearchid" resultType="com.model.Notice" parameterType="java.lang.String">
+		select * from notice where NOid=#{noid,jdbcType=INTEGER}
+	</select>
+	
+	<update id="NoticeFlag" parameterType="com.model.Notice">
+	update notice set Nflag= #{nflag,jdbcType=INTEGER} where NOid=#{noid,jdbcType=INTEGER}
+	</update>
+</mapper>
